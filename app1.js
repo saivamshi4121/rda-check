@@ -1,4 +1,4 @@
- import readline from 'readline';
+import readline from 'readline';
 
 // Interface for user input
 const rl = readline.createInterface({
@@ -34,11 +34,11 @@ function getNutritionalInfo(callback) {
         rl.question('Is this product solid (grams) or liquid (milliliters)? (Enter "g" for solid or "ml" for liquid): ', (unit) => {
             if (unit !== 'g' && unit !== 'ml') {
                 console.error('Invalid unit. Please enter "g" for solid or "ml" for liquid.');
-                rl.question(`Enter the serving size in ${unit}: `, (servingSizeInput) => {
                 getNutritionalInfo(callback); // Ask again
                 return;
             }
 
+            rl.question(`Enter the serving size in ${unit}: `, (servingSizeInput) => {
                 const servingSize = parseFloat(servingSizeInput);
                 if (isNaN(servingSize) || servingSize <= 0) {
                     console.error("Invalid serving size. Please enter a valid number.");
@@ -73,7 +73,7 @@ function scaleNutrition(nutritionPerServing, userServingSize) {
     const scalingFactor = userServingSize / nutritionPerServing.servingSize; // Calculate scaling factor
 
     return {
-        energy: (nutritionPerServing.energy * scal  ingFactor).toFixed(2),                // Energy in kcal
+        energy: (nutritionPerServing.energy * scalingFactor).toFixed(2),                // Energy in kcal
         protein: (nutritionPerServing.protein * scalingFactor).toFixed(2),              // Protein in g
         carbohydrates: (nutritionPerServing.carbohydrates * scalingFactor).toFixed(2),  // Total carbs in g
         addedSugars: (nutritionPerServing.addedSugars * scalingFactor).toFixed(2),      // Added sugars in g
